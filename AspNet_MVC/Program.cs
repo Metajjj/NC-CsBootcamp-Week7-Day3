@@ -5,11 +5,17 @@ namespace AspNet_MVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddControllers(); //Adding controllers from control folder (controller base class)
+
             var app = builder.Build();
 
-            app.MapGet("/", () => "Hello World!");
+            app.UseRouting(); // ??
 
-            app.Run();
+                // ??
+            app.UseEndpoints(endpoints => { _ = endpoints.MapControllers(); });
+
+            app.Run(); //Start the app
         }
     }
 }
