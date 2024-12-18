@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using AspNet_MVC.Models;
 using AspNet_MVC.Tables;
 
 namespace AspNet_MVC.Services
@@ -7,7 +8,17 @@ namespace AspNet_MVC.Services
     {
         public List<Author> GetAllAuthors()
         {
-            return JsonSerializer.Deserialize<List<Author>>(File.ReadAllText(@"Resources/Authors.json"));
+            return AuthorModel.GetAllAuthors();
+        }
+
+        public Author GetAuthorById(int id)
+        {
+            return AuthorModel.GetAuthorByID(id);
+        }
+
+        public bool AddAuthor(string authorjson)
+        {
+            return AuthorModel.AddAuthor(authorjson);
         }
     }
 }

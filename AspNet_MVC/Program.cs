@@ -12,13 +12,13 @@ namespace AspNet_MVC
             builder.Services.AddControllers(); //Adding controllers from control folder (controller base class)
 
             // builder.Services.AddScoped<IAuthorService, AuthorService>();
-            builder.Services.AddScoped<AuthorService>();
-            builder.Services.AddScoped<AuthorModel>();
+           // builder.Services.AddScoped<AuthorService, AuthorService>();
+            builder.Services.AddScoped<AuthorModel, AuthorModel>();
 
 
             var app = builder.Build();
 
-            app.UseRouting(); // ??
+            app.UseRouting(); // allows app to respond to different endpoints
 
                 // ??
             app.UseEndpoints(endpoints => { _ = endpoints.MapControllers(); });
