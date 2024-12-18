@@ -12,12 +12,17 @@ namespace AspNet_MVC.Services
 
         public Book GetById(string id)
         {
-            return BookModel.GetBook(int.Parse(id));
+            return BookModel.GetBookById(int.Parse(id));
         }
 
         public Book AddBook(Book book)
         {
             return BookModel.AddBook(book);
+        }
+
+        public Book DelById(string id)
+        {
+            return BookModel.DelBookById(int.Parse(id));
         }
     }
 }

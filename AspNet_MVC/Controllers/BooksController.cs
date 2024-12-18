@@ -53,7 +53,7 @@ namespace AspNet_MVC.Controllers
 
             var htpc = HttpContext;
 
-            if (result == null)
+            if (result != null)
             {
                 htpc.Response.StatusCode = StatusCodes.Status201Created;
                 htpc.Response.Body.WriteAsync(
@@ -66,7 +66,7 @@ namespace AspNet_MVC.Controllers
             {
                 htpc.Response.StatusCode = StatusCodes.Status400BadRequest;
                 htpc.Response.Body.WriteAsync(
-                    "Provided author name / id doesn't exist"
+                    "Provided author name doesn't exist"
                     .Select(c => Convert.ToByte(c))
                     .ToArray()
                 );
@@ -76,6 +76,23 @@ namespace AspNet_MVC.Controllers
             return htpc.Response.StatusCode == StatusCodes.Status201Created ? Created() : BadRequest();
             //return result != null ? Created() : BadRequest("Provided author name / id doesn't exist");
 
+        }
+
+
+        [HttpDelete]
+        public IActionResult DelBook(string id)
+        {
+            try
+            {
+                var b = _BookServices.DelById(id);
+
+                return (b == null) ? NotFound("Book of given ID is not found!\n Cannot be deleted") : NoContent();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("param is NaN! (not a number)");
+            }
         }
     }
 }
