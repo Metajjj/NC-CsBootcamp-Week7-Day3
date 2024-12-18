@@ -10,5 +10,13 @@ namespace AspNet_MVC.Models
         {
             return JsonSerializer.Deserialize<List<Book>>(File.ReadAllText(@"Resources/Books.json"));
         }
+
+        public static Book GetBook(int id)
+        {
+            return JsonSerializer.Deserialize<List<Book>>(File.ReadAllText(@"Resources/Books.json"))
+                .Where(b=>b.Id == id)
+                .Concat([null]) //Optional default NULL if book isn't found with given ID
+                .First();
+        }
     }
 }

@@ -9,5 +9,10 @@ namespace AspNet_MVC.Services
         {
             return BookModel.GetAllBooks();
         }
+
+        public Book GetById(string id)
+        {
+            return BookModel.GetBook(int.Parse(id));
+        }
     }
 }
