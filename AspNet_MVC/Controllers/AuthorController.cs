@@ -82,7 +82,7 @@ namespace AspNet_MVC.Controllers
                 //htpc.Response.StatusCode = StatusCodes.Status204NoContent;
                 return NoContent(); //abstracts and handles htpc - easier to validate in testing vs htpc
             }
-            catch (Exception ex)
+            catch (FormatException ex)
             {
                     //400 if id isnt safe to parse!
                 htpc.Response.StatusCode = StatusCodes.Status400BadRequest;

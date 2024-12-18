@@ -18,10 +18,10 @@ namespace AspNet_MVC.Controllers
         [HttpGet]
         public IActionResult GetAllBooks()
         {
-            var authors = _BookServices.GetAllBooks();
+            var books = _BookServices.GetAllBooks();
 
             return Ok(
-                JsonSerializer.Serialize(authors, new JsonSerializerOptions { WriteIndented = true })
+                JsonSerializer.Serialize(books, new JsonSerializerOptions { WriteIndented = true })
             );
             //return StatusCode(200, authors)
         }
@@ -39,7 +39,26 @@ namespace AspNet_MVC.Controllers
                 return (b == null) ? NotFound("Book of given ID is not found!") : Ok(JsonSerializer.Serialize(b, new JsonSerializerOptions { WriteIndented = true }));
 
             }
-            catch (Exception ex)
+            catch (FormatException ex)
+            {
+                return BadRequest("param is NaN! (not a number)");
+            }
+        }
+
+        [HttpGet("author/{authorId}")]
+        public IActionResult GetBookByAuthor(string authorId)
+        {
+            try
+            {
+                var result = _BookServices.GetBooksByAuthId(authorId);
+
+                return Ok(
+                                                //If left is null, use default author name
+                    $"Books by { (result.FirstOrDefault() ?? new Book { Author="given auther ID does not exist! " } ).Author} :\n "+
+                    JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true })
+                );
+            }
+            catch (FormatException ex)
             {
                 return BadRequest("param is NaN! (not a number)");
             }
@@ -89,7 +108,7 @@ namespace AspNet_MVC.Controllers
                 return (b == null) ? NotFound("Book of given ID is not found!\n Cannot be deleted") : NoContent();
 
             }
-            catch (Exception ex)
+            catch (FormatException ex)
             {
                 return BadRequest("param is NaN! (not a number)");
             }

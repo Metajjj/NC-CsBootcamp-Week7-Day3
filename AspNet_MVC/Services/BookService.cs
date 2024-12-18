@@ -24,5 +24,10 @@ namespace AspNet_MVC.Services
         {
             return BookModel.DelBookById(int.Parse(id));
         }
+
+        public List<Book> GetBooksByAuthId(string aID)
+        {
+            return BookModel.GetBooksByAuthID(int.Parse(aID));
+        }
     }
 }

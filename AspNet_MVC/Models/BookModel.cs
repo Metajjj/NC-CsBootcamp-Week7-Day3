@@ -53,5 +53,16 @@ namespace AspNet_MVC.Models
 
             return newBooks.Count() != books.Count() ? books.First(b => b.Id == id) : null;
         }
+
+        public static List<Book> GetBooksByAuthID(int id)
+        {
+            //Err if no match on .First() => .FirstOrDefault() == default(auth) 
+            // default of ref type is null ! default of data type (String, int etc..) are implicit empty ("", 0) etc
+            
+            var auth = AuthorModel.GetAllAuthors().FirstOrDefault(a=> a.Id == id);
+
+                                                        //null check to avoid null err on 2nd condition
+            return GetAllBooks().Where(b => auth!=null && b.Author.ToLower() == auth.Name.ToLower()).ToList();
+        }
     }
 }
