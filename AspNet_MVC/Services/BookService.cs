@@ -14,5 +14,10 @@ namespace AspNet_MVC.Services
         {
             return BookModel.GetBook(int.Parse(id));
         }
+
+        public Book AddBook(Book book)
+        {
+            return BookModel.AddBook(book);
+        }
     }
 }

@@ -44,5 +44,38 @@ namespace AspNet_MVC.Controllers
                 return BadRequest("param is NaN! (not a number)");
             }
         }
+
+
+        [HttpPost()]
+        public IActionResult AddBook(Book book)
+        {
+            var result = _BookServices.AddBook(book);
+
+            var htpc = HttpContext;
+
+            if (result == null)
+            {
+                htpc.Response.StatusCode = StatusCodes.Status201Created;
+                htpc.Response.Body.WriteAsync(
+                    JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true })
+                    .Select(c => Convert.ToByte(c))
+                    .ToArray()
+                );
+            }
+            else
+            {
+                htpc.Response.StatusCode = StatusCodes.Status400BadRequest;
+                htpc.Response.Body.WriteAsync(
+                    "Provided author name / id doesn't exist"
+                    .Select(c => Convert.ToByte(c))
+                    .ToArray()
+                );
+            }
+
+
+            return htpc.Response.StatusCode == StatusCodes.Status201Created ? Created() : BadRequest();
+            //return result != null ? Created() : BadRequest("Provided author name / id doesn't exist");
+
+        }
     }
 }
