@@ -37,11 +37,18 @@ namespace AspNet_MVC.Controllers
             return Ok(
                 JsonSerializer.Serialize(author, new JsonSerializerOptions { WriteIndented = true })
             );
+
+            var htpc = HttpContext;
+            htpc.Response.StatusCode = StatusCodes.Status200OK;
+            htpc.Response.Body.WriteAsync(
+                JsonSerializer.Serialize(author, new JsonSerializerOptions { WriteIndented = true })
+                .Select(c => Convert.ToByte(c))
+                .ToArray()
+            );
         }
 
 
-        [HttpPost]
-                            //Auto Deserialised JSON string into the class type
+        [HttpPost] //Auto Deserialised JSON string into the class type
         public IActionResult PostAuthor(Author author)
         {
 
@@ -62,6 +69,15 @@ namespace AspNet_MVC.Controllers
             }
             return BadRequest();
 
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteAuthor(int id)
+        {
+            //TODO del
+
+            return null;
         }
     }
 }
