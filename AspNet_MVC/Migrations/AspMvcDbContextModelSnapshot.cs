@@ -141,7 +141,7 @@ namespace AspNet_MVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 12,
+                            Id = 10,
                             Author = "George Orwell",
                             Title = "1984",
                             Year = 1949,

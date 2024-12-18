@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNet_MVC.Migrations
 {
     [DbContext(typeof(AspMvcDbContext))]
-    [Migration("20241218163551_Initial")]
+    [Migration("20241218164734_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -144,7 +144,7 @@ namespace AspNet_MVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 12,
+                            Id = 10,
                             Author = "George Orwell",
                             Title = "1984",
                             Year = 1949,

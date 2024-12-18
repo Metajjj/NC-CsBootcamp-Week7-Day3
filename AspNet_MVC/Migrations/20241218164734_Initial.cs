@@ -80,8 +80,8 @@ namespace AspNet_MVC.Migrations
                     { 7, "Mark Twain", "The Adventures of Tom Sawyer", 1876, 8 },
                     { 8, "Virginia Woolf", "Mrs Dalloway", 1925, 9 },
                     { 9, "Haruki Murakami", "Norwegian Wood", 1987, 10 },
-                    { 11, "Confucius", "NUL", 0, 2 },
-                    { 12, "George Orwell", "1984", 1949, 1 }
+                    { 10, "George Orwell", "1984", 1949, 1 },
+                    { 11, "Confucius", "NUL", 0, 2 }
                 });
 
             migrationBuilder.CreateIndex(
