@@ -1,3 +1,6 @@
+using AspNet_MVC.Models;
+using AspNet_MVC.Services;
+
 namespace AspNet_MVC
 {
     public class Program
@@ -7,6 +10,11 @@ namespace AspNet_MVC
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers(); //Adding controllers from control folder (controller base class)
+
+            // builder.Services.AddScoped<IAuthorService, AuthorService>();
+            builder.Services.AddScoped<AuthorService>();
+            builder.Services.AddScoped<AuthorModel>();
+
 
             var app = builder.Build();
 
