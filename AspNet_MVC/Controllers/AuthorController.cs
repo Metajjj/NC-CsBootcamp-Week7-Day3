@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AspNet_MVC.Controllers
 {
     [Route("/[controller]")] //Where the controller starts from
+        //Case-insensitive
     [ApiController]
     public class AuthorController : Controller
     {
@@ -40,10 +41,25 @@ namespace AspNet_MVC.Controllers
 
 
         [HttpPost]
-        public IActionResult PostAuthor(string author)
+                            //Auto Deserialised JSON string into the class type
+        public IActionResult PostAuthor(Author author)
         {
-            bool success = AuthorModel.AddAuthor(author);
-            if (success) return Created();
+
+            var htpc = HttpContext;
+
+            //htpc.Request.Body //TODO figure out? then can handle any body input!
+
+            bool success = _AuthorServices.AddAuthor(author);
+            if (success)
+            {
+                htpc.Response.StatusCode = StatusCodes.Status201Created;
+                htpc.Response.Body.WriteAsync(
+                    JsonSerializer.Serialize(author, new JsonSerializerOptions { WriteIndented = true })
+                    .Select(c=>Convert.ToByte(c))
+                    .ToArray()                    
+                );
+                return Created(); //Return only affects GET requests? sends to client to view
+            }
             return BadRequest();
 
         }

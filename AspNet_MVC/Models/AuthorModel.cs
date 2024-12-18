@@ -15,12 +15,12 @@ namespace AspNet_MVC.Models
             return JsonSerializer.Deserialize<List<Author>>(File.ReadAllText(@"Resources/Authors.json")).Where(a => a.Id == id).First();
         }
 
-        public static bool AddAuthor(string author)
+        public static bool AddAuthor(Author newAuthor)
         {
             try
             {
                 List<Author> authors = GetAllAuthors();
-                var newAuthor = JsonSerializer.Deserialize<Author>(author);
+                //var newAuthor = JsonSerializer.Deserialize<Author>(author);
                 newAuthor.Id = authors.Count() + 1;
                 authors.Add(newAuthor);
                 File.WriteAllText(@"Resources/Authors.json", JsonSerializer.Serialize(authors,new JsonSerializerOptions { WriteIndented = true}));

@@ -16,7 +16,7 @@ namespace AspNet_MVC.Services
             return AuthorModel.GetAuthorByID(id);
         }
 
-        public bool AddAuthor(string authorjson)
+        public bool AddAuthor(Author authorjson)
         {
             return AuthorModel.AddAuthor(authorjson);
         }
