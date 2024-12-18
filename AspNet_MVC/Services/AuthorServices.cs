@@ -20,5 +20,10 @@ namespace AspNet_MVC.Services
         {
             return AuthorModel.AddAuthor(authorjson);
         }
+
+        public void DelAuthor(string id)
+        {
+            AuthorModel.DelAuthorById(int.Parse(id));
+        }
     }
 }

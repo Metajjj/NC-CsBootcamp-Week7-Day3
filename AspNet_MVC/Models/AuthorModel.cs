@@ -32,5 +32,11 @@ namespace AspNet_MVC.Models
             }
         }
 
+        public static void DelAuthorById(int id)
+        {
+            var Auths = GetAllAuthors().Where(a=>a.Id!=id).ToList();
+
+            File.WriteAllText(@"Resources/Authors.json", JsonSerializer.Serialize(Auths, new JsonSerializerOptions { WriteIndented = true }));
+        }
     }
 }

@@ -5,6 +5,14 @@ namespace AspNet_MVC
 {
     public class Program
     {
+        /*
+        app.MapGet("",()=>{})
+            =>
+            Controller("route", service()=>{model.Action()});
+                M V C seperation ?
+        */
+
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);

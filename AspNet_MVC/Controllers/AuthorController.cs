@@ -6,17 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNet_MVC.Controllers
 {
-    [Route("/[controller]")] //Where the controller starts from
-        //Case-insensitive
+    [Route("/api/[controller]")] //Where the controller starts from
+        //Case-insensitive   [controller] -> remove appended Controller
     [ApiController]
     public class AuthorController : Controller
     {
         private AuthorServices _AuthorServices = new();
-        //public AuthorController(AuthorServices As) //Retreive from constructor to get service
-        //{ _AuthorServices = As; }
-
-            //Mapping => Map.Get("")
-        //[HttpGet][Route("")]
+        /*public AuthorController(AuthorServices As) //Retreive from constructor to get service if supplied
+        { _AuthorServices = As; }*/
 
         [HttpGet]
         public IActionResult GetAuthors()
@@ -73,9 +70,23 @@ namespace AspNet_MVC.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteAuthor(int id)
+        public IActionResult DeleteAuthor(string id)
         {
+            var htpc = HttpContext;
+
             //TODO del
+            try
+            {
+                _AuthorServices.DelAuthor(id);
+
+                //htpc.Response.StatusCode = StatusCodes.Status204NoContent;
+                return NoContent(); //abstracts and handles htpc - easier to validate in testing vs htpc
+            }
+            catch (Exception ex)
+            {
+                    //400 if id isnt safe to parse!
+                htpc.Response.StatusCode = StatusCodes.Status400BadRequest;
+            }
 
             return null;
         }
