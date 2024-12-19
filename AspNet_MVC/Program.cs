@@ -60,8 +60,8 @@ public class Program
         builder.Services.AddControllers(); //Adding controllers from control folder (controller base class)
 
         // builder.Services.AddScoped<IAuthorService, AuthorService>();
-       // builder.Services.AddScoped<AuthorService, AuthorService>();
-        builder.Services.AddScoped<AuthorModel, AuthorModel>();
+        builder.Services.AddScoped<AuthorServices>();
+        builder.Services.AddScoped<AuthorModel>();
 
 
         var app = builder.Build();

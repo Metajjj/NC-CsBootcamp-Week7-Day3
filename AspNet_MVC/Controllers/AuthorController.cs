@@ -11,9 +11,9 @@ namespace AspNet_MVC.Controllers
     [ApiController]
     public class AuthorController : Controller
     {
-        private AuthorServices _AuthorServices = new();
-        /*public AuthorController(AuthorServices As) //Retreive from constructor to get service if supplied
-        { _AuthorServices = As; }*/
+        private AuthorServices _AuthorServices;
+        public AuthorController(AuthorServices As) //Retreive from constructor to get service if supplied
+        { _AuthorServices = As; }
 
         [HttpGet]
         public IActionResult GetAuthors()
