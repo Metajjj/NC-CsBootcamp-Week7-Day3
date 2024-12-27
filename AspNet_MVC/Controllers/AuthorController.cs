@@ -11,11 +11,11 @@ namespace AspNet_MVC.Controllers
     [ApiController]
     public class AuthorController : Controller
     {
-        private AuthorServices _AuthorServices = new();
-        //public AuthorController(AuthorServices As) //Retreive from constructor to get service
-        //{ _AuthorServices = As; }
+        private AuthorServices _AuthorServices; //= new();
+        public AuthorController(AuthorServices authorService) //Retreive from constructor to get service
+        { _AuthorServices = authorService; }
 
-            //Mapping => Map.Get("")
+        //Mapping => Map.Get("")
         //[HttpGet][Route("")]
 
         [HttpGet]

@@ -1,5 +1,6 @@
 using AspNet_MVC.Models;
 using AspNet_MVC.Services;
+using AspNet_MVC.Controllers;
 
 namespace AspNet_MVC
 {
@@ -12,7 +13,7 @@ namespace AspNet_MVC
             builder.Services.AddControllers(); //Adding controllers from control folder (controller base class)
 
             // builder.Services.AddScoped<IAuthorService, AuthorService>();
-           // builder.Services.AddScoped<AuthorService, AuthorService>();
+            builder.Services.AddScoped<AuthorServices, AuthorServices>();
             builder.Services.AddScoped<AuthorModel, AuthorModel>();
 
 
