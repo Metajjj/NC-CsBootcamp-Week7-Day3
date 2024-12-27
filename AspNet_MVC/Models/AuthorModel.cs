@@ -32,5 +32,13 @@ namespace AspNet_MVC.Models
             }
         }
 
+        public static bool DeleteAuthorByID(int id)
+        {
+            List<Author> authors = GetAllAuthors();
+            var newAuthors = authors.Where(a => a.Id != id).ToList();
+            File.WriteAllText(@"Resources/Authors.json", JsonSerializer.Serialize(newAuthors, new JsonSerializerOptions { WriteIndented = true }));
+            return true;
+        }
+
     }
 }
