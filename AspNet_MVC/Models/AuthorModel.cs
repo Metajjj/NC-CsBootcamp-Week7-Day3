@@ -21,7 +21,7 @@ namespace AspNet_MVC.Models
             {
                 List<Author> authors = GetAllAuthors();
                 //var newAuthor = JsonSerializer.Deserialize<Author>(author);
-                newAuthor.Id = authors.Count() + 1;
+                newAuthor.Id = authors.Last().Id + 1;       //changed to always increment >> every insertion has a unique id
                 authors.Add(newAuthor);
                 File.WriteAllText(@"Resources/Authors.json", JsonSerializer.Serialize(authors,new JsonSerializerOptions { WriteIndented = true}));
                 return true;
