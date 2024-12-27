@@ -75,9 +75,9 @@ namespace AspNet_MVC.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteAuthor(int id)
         {
-            //TODO del
-
-            return null;
+            bool success = _AuthorServices.DeleteAuthorByID(id);
+            IActionResult response = success ?  NoContent() : BadRequest();
+            return response;
         }
     }
 }
